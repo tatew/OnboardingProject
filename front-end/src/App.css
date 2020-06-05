@@ -1,0 +1,48 @@
+label {
+  margin: 10px;
+}
+
+.content {
+  z-index: 0;
+}
+
+h1 {
+  margin-bottom: 0px;
+  padding: 20px;
+  color: white;
+}
+
+header {
+  background-color: darkgreen;
+}
+
+a {
+  padding: 10px;
+  margin: 10px;
+  color: white;
+}
+
+nav {
+  padding: 10px;
+  background-color: darkred;
+  margin-bottom: 20px;
+}
+
+p {
+  margin: 5px;
+}
+
+input { 
+  margin-top: 15px;
+}
+
+.image {
+  position:fixed;
+  bottom:50px;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  min-height: 100px;
+  z-index: 5;
+}
+

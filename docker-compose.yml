@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+    ui:
+        build: front-end
+        image: sc-ui
+        container_name: sc-ui
+        ports:
+            - "3000:3000"
+        stdin_open: true
+        volumes: 
+            - "./front-end:/app:rw"
+    api:
+        build: back-end
+        image: sc-api
+        container_name: sc-api
+        ports:
+            - "5000:5000"
+            - "5001:5001"
+        volumes:
+            - "./back-end:/app:rw"
+    db:
+        image: postgres
+        environment:
+            POSTGRES_USER: sc
+            POSTGRES_PASSWORD: api-password
+            POSTGRES_DB: scdb

@@ -1,0 +1,9 @@
+using System.Collections.Generic;
+
+public class Country 
+{
+    public int Id {get; set; }
+    public string Code {get; set; }
+    public string Name {get; set; }
+    public ICollection<Country> States {get; set;}
+}
