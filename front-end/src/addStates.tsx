@@ -50,7 +50,7 @@ class AddStates extends React.Component<Props,State> {
     }
 
     componentDidMount = () => {
-        this.getWebData('http://localhost:5000/api/countries/')
+        this.getWebData('/api/countries/')
     }   
 
     render(){

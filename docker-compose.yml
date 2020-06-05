@@ -1,23 +1,35 @@
 version: '3.7'
 services:
+    rp:
+        image: traefik:v2.2
+        command: 
+            - "--api.insecure=true" 
+            - "--providers.docker=true"
+        ports: 
+            - "80:80"
+            - "8080:8080"
+        volumes: 
+            - /var/run/docker.sock:/var/run/docker.sock
+
     ui:
         build: front-end
         image: sc-ui
         container_name: sc-ui
-        ports:
-            - "3000:3000"
         stdin_open: true
         volumes: 
             - "./front-end:/app:rw"
+        labels:
+            - "traefik.http.routers.ui.rule=PathPrefix(`/`)"
+            - "treafik.http.services.ui.loadbalancer.server.port=3000"
     api:
         build: back-end
         image: sc-api
         container_name: sc-api
-        ports:
-            - "5000:5000"
-            - "5001:5001"
         volumes:
             - "./back-end:/app:rw"
+        labels:
+            - "traefik.http.routers.api.rule=PathPrefix(`/api/`)"
+            - "treafik.http.services.api.loadbalancer.server.port=5000"
     db:
         image: postgres
         environment:

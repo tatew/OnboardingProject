@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using StatesCountriesApi.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace StatesCountriesApi
 {
@@ -22,17 +23,11 @@ namespace StatesCountriesApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CountryContext>(options =>
-            options.UseNpgsql("Host=db;Database=scdb;Username=sc;Password=api-password"));
+            options.UseLazyLoadingProxies().UseNpgsql("Host=db;Database=scdb;Username=sc;Password=api-password"));
 
-            
-
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            }));    
-            services.AddControllers();
+          
+            services.AddControllers().AddNewtonsoftJson(
+                options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +41,6 @@ namespace StatesCountriesApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors("MyPolicy");
 
             app.UseAuthorization();
 

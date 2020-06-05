@@ -31,7 +31,7 @@ namespace StatesCountriesApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Country>> GetCountry(short id)
         {
-            var country = await _context.Countries.FindAsync(id);
+            var country = await _context.Countries.Where(country => country.Id == id).FirstOrDefaultAsync();
 
             if (country == null)
             {

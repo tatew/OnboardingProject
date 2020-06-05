@@ -257,3 +257,8 @@
 /app/obj/Debug/netcoreapp3.1/StatesCountriesApi.dll
 /app/obj/Debug/netcoreapp3.1/StatesCountriesApi.pdb
 /app/obj/Debug/netcoreapp3.1/StatesCountriesApi.genruntimeconfig.cache
+/app/bin/Debug/netcoreapp3.1/Castle.Core.dll
+/app/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.Proxies.dll
+/app/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.JsonPatch.dll
+/app/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/app/bin/Debug/netcoreapp3.1/Newtonsoft.Json.Bson.dll

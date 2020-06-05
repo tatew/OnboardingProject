@@ -55,13 +55,13 @@ class StateCountry extends React.Component<{},State> {
     }
 
     componentDidMount() {
-        this.getWebData('http://localhost:5000/api/countries/', 'country')
+        this.getWebData('/api/countries/', 'country')
     }
 
     loadStates = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const code = e.target.value;
         if(code != '--') {
-            const url = 'http://localhost:5000/api/countries/' + code + '/states/'
+            const url = '/api/countries/' + code + '/states/'
             this.getWebData(url, 'state')
         } else {
             this.setState({

@@ -27,11 +27,11 @@ class UpdateServer extends React.Component<Props, {}> {
         let url: string;
         if (this.props.name == 'Country') {
             toPost = {code: newData[1], name: newData[0]};
-            url = 'http://localhost:5000/api/countries/';
+            url = '/api/countries/';
             this.postData(toPost, url);
         } else if(this.props.name == 'State' && this.props.selectedCountry != null) {
             toPost = {code: newData[1], name: newData[0], countryId: parseInt(this.props.selectedCountry)}
-            url = 'http://localhost:5000/api/states/'
+            url = '/api/states/'
             this.postData(toPost, url);
         } else {
             alert('ya done goofed');
