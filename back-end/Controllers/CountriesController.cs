@@ -93,7 +93,7 @@ namespace StatesCountriesApi.Controllers
 
         // DELETE: api/Country/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Country>> DeleteCountry(short id)
+        public async Task<ActionResult<Country>> DeleteCountry(int id)
         {
             var country = await _context.Countries.FindAsync(id);
             if (country == null)
