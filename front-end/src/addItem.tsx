@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormik, Formik} from 'formik';
+import { useFormik, Formik, FormikErrors, FormikValues} from 'formik';
 
 interface State {
     newCountry: string,
@@ -26,6 +26,14 @@ class AddCountries extends React.Component<Props, State> {
             newCountry: e.target.value
         },() => {console.log(this.state.newCountry)});
     }
+
+    // validate = (values: FormValues) => {
+    //     const errors: FormikErrors = {};
+    //     if (!values.country){
+    //         errors.country = 'Required';
+    //     }
+    //     return errors;
+    // };
 
     countryForm  = () => 
     {
