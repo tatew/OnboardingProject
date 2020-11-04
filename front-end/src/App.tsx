@@ -13,14 +13,14 @@ function App() {
           <h1>States & Countries</h1>
         </header>
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/AddCountries">Add Countries</Link>
-          <Link to="/AddStates">Add States</Link>
+          <Link to="./">Home</Link>
+          <Link to="./AddCountries">Add Countries</Link>
+          <Link to="./AddStates">Add States</Link>
         </nav>
         <Switch>
-          <Route path="/" component={StateCountry} exact></Route>
-          <Route path="/AddStates" component={AddStates}></Route>
-          <Route path="/AddCountries" render={() => <UpdateServer name="Country"/>}></Route>
+          <Route path="/old/" component={StateCountry} exact></Route>
+          <Route path="/old/AddStates" component={AddStates}></Route>
+          <Route path="/old/AddCountries" render={() => <UpdateServer name="Country"/>}></Route>
         </Switch>
       </div>
       <div className="image">

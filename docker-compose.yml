@@ -19,8 +19,18 @@ services:
         volumes: 
             - "./front-end:/app:rw"
         labels:
-            - "traefik.http.routers.ui.rule=PathPrefix(`/`)"
+            - "traefik.http.routers.ui.rule=PathPrefix(`/old/`)"
             - "treafik.http.services.ui.loadbalancer.server.port=3000"
+    ng-ui:
+        build: angular-front-end
+        image: ng-ui
+        container_name: ng-ui
+        volumes: 
+            - './angular-front-end:/app'
+            - '/app/node_modules'
+        labels:
+            - "traefik.http.routers.ng-ui.rule=PathPrefix(`/`)"
+            - "treafik.http.services.ng-ui.loadbalancer.server.port=4200"
     api:
         build: back-end
         image: sc-api
@@ -32,6 +42,8 @@ services:
             - "treafik.http.services.api.loadbalancer.server.port=5000"
     db:
         image: postgres
+        ports:
+            - "5432:5432"
         environment:
             POSTGRES_USER: sc
             POSTGRES_PASSWORD: api-password

@@ -4,9 +4,11 @@ WORKDIR /app
 
 COPY StatesCountriesApi.csproj .
 RUN dotnet restore
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="$PATH:/root/.dotnet/tools"
 
 COPY . .
 
 EXPOSE 5000
 
-ENTRYPOINT dotnet watch run --urls "http://0.0.0.0:5000"
+CMD ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:5000"]

@@ -1,5 +1,6 @@
 {
   "name": "states-countries",
+  "homepage": "http://localhost/old/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
