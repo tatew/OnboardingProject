@@ -1,0 +1,9 @@
+<mat-form-field>
+    <mat-label>Select a {{type}}</mat-label>
+    <mat-select [(value)]="selected" (selectionChange)="onChange()">
+        <mat-option *ngFor="let option of options" [value]="option">
+            {{option.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<p *ngIf="selected">Selected {{type}}: {{selected.name}}</p>

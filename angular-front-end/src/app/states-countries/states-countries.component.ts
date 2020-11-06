@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Country {
-    id: number;
-    code: string;
-    name: string;
-}
+import { Option } from '../interfaces';
+import {StatesCountriesService} from '../states-countries.service';
 
 @Component({
     selector: 'app-states-countries',
@@ -12,13 +8,27 @@ interface Country {
     styleUrls: ['./states-countries.component.css']
 })
 export class StatesCountriesComponent implements OnInit {
-    countries: Country[] = [
-        {id: 1, code: "US", name: "United Sates"},
-        {id: 2, code: "UK", name: "United Kingdom"}
-    ];
-    constructor() { }
+    countries: Option[];
+    states: Option[];
+    selected: string;
+    constructor(private statesCountriesService : StatesCountriesService) { }
 
     ngOnInit(): void {
+       this.getCountries();
+       this.getStates();
     }
 
+    getCountries(): void {
+        this.statesCountriesService.getCountries()
+            .subscribe(countries => this.countries = countries);
+    }
+
+    getStates(): void {
+        this.statesCountriesService.getStates("US")
+            .subscribe(states => this.states = states);
+    }
+
+    countryChange(opt: Option): void {
+        this.selected = opt.code;
+    }
 }
