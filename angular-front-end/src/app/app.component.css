@@ -2,4 +2,9 @@
     text-align: center;
     background-color: darkgreen;
     color: white;
+    margin-bottom: 1em;
+}
+
+.button {
+    margin: 0.5em
 }

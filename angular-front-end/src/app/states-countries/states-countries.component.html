@@ -1,2 +1,4 @@
 <app-dropdown type="Country" [options]="countries" (changed)="countryChange($event)"></app-dropdown>
-<p>{{selected.code}}</p>
+<p *ngIf="selectedCountry">Selected country: {{selectedCountry.name}}</p>
+<app-dropdown *ngIf="states" type="State" [options]="states" (changed)="stateChange($event)"></app-dropdown>
+<p *ngIf="selectedState">Selected state: {{selectedState.name}}</p>

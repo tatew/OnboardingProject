@@ -10,12 +10,12 @@ import {StatesCountriesService} from '../states-countries.service';
 export class StatesCountriesComponent implements OnInit {
     countries: Option[];
     states: Option[];
-    selected: string;
+    selectedCountry: Option;
+    selectedState: Option;
     constructor(private statesCountriesService : StatesCountriesService) { }
 
     ngOnInit(): void {
        this.getCountries();
-       this.getStates();
     }
 
     getCountries(): void {
@@ -23,12 +23,18 @@ export class StatesCountriesComponent implements OnInit {
             .subscribe(countries => this.countries = countries);
     }
 
-    getStates(): void {
-        this.statesCountriesService.getStates("US")
+    getStates(code: string): void {
+        this.statesCountriesService.getStates(code)
             .subscribe(states => this.states = states);
     }
 
     countryChange(opt: Option): void {
-        this.selected = opt.code;
+        this.selectedCountry = opt;
+        this.getStates(opt.code);
+        this.selectedState = null;
+    }
+
+    stateChange(opt: Option): void {
+        this.selectedState = opt;
     }
 }
