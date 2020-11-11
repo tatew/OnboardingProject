@@ -16,11 +16,11 @@ export class AddCountryComponent implements OnInit {
     }
 
     addCountry(): void {
-        const countryFields = this.newCountry.split(",");
-        countryFields.forEach(e => e.trim);
-        if (countryFields.length != 2)
+        let countryFields = this.newCountry.split(",");
+        countryFields = countryFields.map(e => e.trim());
+        if (countryFields.length != 2 || countryFields[1].length != 2)
         {
-            alert("ERROR");
+            alert("ERROR: Please enter a country in the format: Name, two letter code");
             this.newCountry = "";
             return;
         }

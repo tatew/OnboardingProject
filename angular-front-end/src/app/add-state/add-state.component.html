@@ -1,1 +1,10 @@
-<p>add-state works!</p>
+<h3>Add State</h3>
+<p>Enter a state in the following format:</p>
+<p>Name, State Code</p>
+<p>Then choose which country that state belongs to</p>
+<mat-form-field>
+    <mat-label>New State</mat-label>
+    <input matInput placeholder="Virginia, VA" [(ngModel)]="newState">
+</mat-form-field>
+<button mat-flat-button color="accent" (click)="addState()">Add!</button>
+<app-dropdown style="display: block;" type="Country" [options]="countries" (changed)="countryChange($event)"></app-dropdown>

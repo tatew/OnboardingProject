@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Option, Country } from './interfaces';
+import { Option, Country, State } from './interfaces';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { countReset } from 'console';
 import { catchError} from 'rxjs/operators';
 
 @Injectable({
@@ -26,6 +25,12 @@ export class StatesCountriesService {
     addCountry(country: Country): Observable<Country> {
         return this.http.post<Country>("/api/countries/", country, this.httpOptions).pipe(
             catchError(this.handleError<any>('Add Country'))
+        );
+    }
+
+    addState(state: State): Observable<State> {
+        return this.http.post<Country>("/api/states/", state, this.httpOptions).pipe(
+            catchError(this.handleError<any>('Add State'))
         );
     }
 
