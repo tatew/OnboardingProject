@@ -20,4 +20,8 @@ export class DropdownComponent implements OnInit {
         this.changed.emit(this.selected);
     }
 
+    reset(): void {
+        this.selected = null;
+    }
+
 }

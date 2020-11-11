@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Directive, OnInit, ViewChild} from '@angular/core';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 import { State, Option } from '../interfaces';
 import {StatesCountriesService} from '../states-countries.service';
 
 @Component({
     selector: 'app-add-state',
     templateUrl: './add-state.component.html',
-    styleUrls: ['./add-state.component.css']
+    styleUrls: ['./add-state.component.css'],
 })
 export class AddStateComponent implements OnInit {
-
+    @ViewChild(DropdownComponent) countryDropdown;
     newState: string;
     countries: Option[];
     selectedCountry: Option;
@@ -45,6 +46,7 @@ export class AddStateComponent implements OnInit {
         this.statesCountriesService.addState(state).subscribe(c => alert(`State ${c.name} was added successfully`));
         this.newState = "";
         this.selectedCountry = null;
+        this.countryDropdown.reset();
     }
 
 }
