@@ -1,25 +1,46 @@
 import { Injectable } from '@angular/core';
-import { Option, Country, State } from './interfaces';
+import { Option, Country, StoreState, State } from './interfaces';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError} from 'rxjs/operators';
+import { catchError, tap} from 'rxjs/operators';
+import { ObservableStore } from '@codewithdan/observable-store';
 
 @Injectable({
     providedIn: 'root'
 })
-export class StatesCountriesService {
+export class StatesCountriesService extends ObservableStore<StoreState> {
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    constructor(private http: HttpClient) { }
-
-    getCountries(): Observable<Option[]> {
-        return this.http.get<Option[]>("/api/countries");
+    constructor(private http: HttpClient) { 
+        super({});
+        const initalState : StoreState = {
+            countries: [],
+            states: []
+        };
+        this.setState(initalState, 'INIT_STATE');
     }
 
-    getStates(countryCode: string): Observable<Option[]> {
-        return this.http.get<Option[]>(`/api/countries/${countryCode}/states/`);
+    getCountries() {
+        const countries = this.getState().countries;
+        if (countries.length == 0) {
+            const countriesObservable = this.http.get<Option[]>("/api/countries").pipe(
+                catchError(this.handleError<any>('Get Countries'))
+            );
+            countriesObservable.subscribe(countries => {
+                this.setState({countries: countries}, 'SET_COUNTRIES')
+            });
+        }
+    }
+
+    getStates(countryCode: string) {
+        const statesObservable = this.http.get<Option[]>(`/api/countries/${countryCode}/states/`).pipe(
+            catchError(this.handleError<any>('Get States'))
+        );
+        statesObservable.subscribe(states => {
+            this.setState({states: states}, 'SET_STATES')
+        })
     }
 
     addCountry(country: Country): Observable<Country> {

@@ -17,10 +17,6 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { AddCountryComponent } from './add-country/add-country.component';
 import { AddStateComponent } from './add-state/add-state.component';
 
-import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './counter.reducer';
-import { MyCounterComponent } from './my-counter/my-counter.component';
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -28,7 +24,6 @@ import { MyCounterComponent } from './my-counter/my-counter.component';
         DropdownComponent,
         AddCountryComponent,
         AddStateComponent,
-        MyCounterComponent
     ],
     imports: [
         BrowserModule,
@@ -40,7 +35,6 @@ import { MyCounterComponent } from './my-counter/my-counter.component';
         MatButtonModule,
         MatInputModule,
         FormsModule,
-        StoreModule.forRoot({count: counterReducer}),
     ],
     providers: [],
     bootstrap: [AppComponent]

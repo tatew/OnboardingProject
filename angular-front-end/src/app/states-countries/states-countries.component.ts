@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Option } from '../interfaces';
-import {StatesCountriesService} from '../states-countries.service';
+import { StatesCountriesService } from '../states-countries.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-states-countries',
@@ -12,20 +13,37 @@ export class StatesCountriesComponent implements OnInit {
     states: Option[];
     selectedCountry: Option;
     selectedState: Option;
-    constructor(private statesCountriesService : StatesCountriesService) { }
+    storeSub: Subscription;
+    constructor(private statesCountriesService: StatesCountriesService) { }
 
     ngOnInit(): void {
-       this.getCountries();
-    }
-
-    getCountries(): void {
-        this.statesCountriesService.getCountries()
-            .subscribe(countries => this.countries = countries);
+        this.storeSub = this.statesCountriesService.stateChanged.subscribe(state => {
+            if (state) {
+                this.countries = state.countries.map(country => {
+                    const opt: Option = {
+                        id: country.id,
+                        code: country.code,
+                        name: country.name
+                    }
+                    return opt;
+                });
+                if (state.states.length != 0) {
+                    this.states = state.states.map(state => {
+                        const opt: Option = {
+                            id: state.id,
+                            code: state.code,
+                            name: state.name
+                        }
+                        return opt;
+                    })
+                }
+            }
+        })
+        this.statesCountriesService.getCountries();
     }
 
     getStates(code: string): void {
         this.statesCountriesService.getStates(code)
-            .subscribe(states => this.states = states);
     }
 
     countryChange(opt: Option): void {

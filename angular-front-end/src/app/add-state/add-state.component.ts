@@ -20,8 +20,8 @@ export class AddStateComponent implements OnInit {
     }
 
     getCountries(): void {
-        this.statesCountriesService.getCountries()
-            .subscribe(countries => this.countries = countries);
+        // this.statesCountriesService.getCountries()
+        //     .subscribe(countries => this.countries = countries);
     }
 
     countryChange(opt : Option): void{
@@ -39,6 +39,7 @@ export class AddStateComponent implements OnInit {
             return;
         }
         const state : State = {
+            id: null,
             name: stateFields[0],
             code: stateFields[1],
             countryId: this.selectedCountry.id
