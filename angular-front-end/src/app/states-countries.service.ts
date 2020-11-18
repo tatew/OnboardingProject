@@ -43,14 +43,24 @@ export class StatesCountriesService extends ObservableStore<StoreState> {
         })
     }
 
-    addCountry(country: Country): Observable<Country> {
+    addCountry(country: Country) : Observable<Country>{
         return this.http.post<Country>("/api/countries/", country, this.httpOptions).pipe(
+            tap(country => {
+                let state = this.getState();
+                state.countries.push(country);
+                this.setState({countries: state.countries}, 'ADD_COUNTRY');
+            }),
             catchError(this.handleError<any>('Add Country'))
         );
     }
 
     addState(state: State): Observable<State> {
-        return this.http.post<Country>("/api/states/", state, this.httpOptions).pipe(
+        return this.http.post<State>("/api/states/", state, this.httpOptions).pipe(
+            tap(state => {
+                let appState = this.getState();
+                appState.states.push(state);
+                this.setState({states: appState.states}, 'ADD_STATE');
+            }),
             catchError(this.handleError<any>('Add State'))
         );
     }

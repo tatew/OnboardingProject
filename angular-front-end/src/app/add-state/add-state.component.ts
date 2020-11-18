@@ -2,6 +2,7 @@ import { Component, Directive, OnInit, ViewChild} from '@angular/core';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { State, Option } from '../interfaces';
 import {StatesCountriesService} from '../states-countries.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-add-state',
@@ -13,15 +14,23 @@ export class AddStateComponent implements OnInit {
     newState: string;
     countries: Option[];
     selectedCountry: Option;
+    storeSub: Subscription;
     constructor(private statesCountriesService : StatesCountriesService) { }
 
     ngOnInit(): void {
-        this.getCountries();
-    }
-
-    getCountries(): void {
-        // this.statesCountriesService.getCountries()
-        //     .subscribe(countries => this.countries = countries);
+        this.storeSub = this.statesCountriesService.stateChanged.subscribe(state => {
+            if (state) {
+                this.countries = state.countries.map(country => {
+                    const opt: Option = {
+                        id: country.id,
+                        code: country.code,
+                        name: country.name
+                    }
+                    return opt;
+                });
+            }
+        })
+        this.statesCountriesService.getCountries();
     }
 
     countryChange(opt : Option): void{
@@ -39,7 +48,7 @@ export class AddStateComponent implements OnInit {
             return;
         }
         const state : State = {
-            id: null,
+            id: 0,
             name: stateFields[0],
             code: stateFields[1],
             countryId: this.selectedCountry.id

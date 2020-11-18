@@ -23,3 +23,5 @@
 /front-end/yarn-error.log*
 
 .vscode/
+/back-end/bin
+/back-end/obj

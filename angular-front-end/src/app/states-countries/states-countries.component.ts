@@ -27,7 +27,7 @@ export class StatesCountriesComponent implements OnInit {
                     }
                     return opt;
                 });
-                if (state.states.length != 0) {
+                if (this.selectedCountry != null) {
                     this.states = state.states.map(state => {
                         const opt: Option = {
                             id: state.id,

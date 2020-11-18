@@ -25,7 +25,7 @@ export class AddCountryComponent implements OnInit {
             return;
         }
         const country : Country = {
-            id: null,
+            id: 0,
             name: countryFields[0],
             code: countryFields[1]
         } 
