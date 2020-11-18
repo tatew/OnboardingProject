@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StatesCountriesApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StatesCountriesApi.Controllers
 {
@@ -46,6 +47,7 @@ namespace StatesCountriesApi.Controllers
         // PUT: api/State/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutState(short id, State state)
         {
@@ -78,6 +80,7 @@ namespace StatesCountriesApi.Controllers
         // POST: api/State
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<State>> PostState(State state)
         {
@@ -88,6 +91,7 @@ namespace StatesCountriesApi.Controllers
         }
 
         // DELETE: api/State/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<State>> DeleteState(short id)
         {
