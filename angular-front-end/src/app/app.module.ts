@@ -16,6 +16,7 @@ import { StatesCountriesComponent } from './states-countries/states-countries.co
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { AddCountryComponent } from './add-country/add-country.component';
 import { AddStateComponent } from './add-state/add-state.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { AddStateComponent } from './add-state/add-state.component';
         DropdownComponent,
         AddCountryComponent,
         AddStateComponent,
+        LoginComponent,
     ],
     imports: [
         BrowserModule,

@@ -4,15 +4,13 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap} from 'rxjs/operators';
 import { ObservableStore } from '@codewithdan/observable-store';
+import { userInfo } from 'os';
 
 @Injectable({
     providedIn: 'root'
 })
 export class StatesCountriesService extends ObservableStore<StoreState> {
 
-    httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
     constructor(private http: HttpClient) { 
         super({});
         const initalState : StoreState = {
@@ -44,7 +42,12 @@ export class StatesCountriesService extends ObservableStore<StoreState> {
     }
 
     addCountry(country: Country) : Observable<Country>{
-        return this.http.post<Country>("/api/countries/", country, this.httpOptions).pipe(
+        const user = sessionStorage.getItem('user');
+        const userData = JSON.parse(user);
+        const httpOptions = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + userData.token })
+        };
+        return this.http.post<Country>("/api/countries/", country, httpOptions).pipe(
             tap(country => {
                 let state = this.getState();
                 state.countries.push(country);
@@ -55,7 +58,12 @@ export class StatesCountriesService extends ObservableStore<StoreState> {
     }
 
     addState(state: State): Observable<State> {
-        return this.http.post<State>("/api/states/", state, this.httpOptions).pipe(
+        const user = sessionStorage.getItem('user');
+        const userData = JSON.parse(user);
+        const httpOptions = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + userData.token })
+        };
+        return this.http.post<State>("/api/states/", state, httpOptions).pipe(
             tap(state => {
                 let appState = this.getState();
                 appState.states.push(state);

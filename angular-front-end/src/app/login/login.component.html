@@ -1,0 +1,12 @@
+<h3>Login</h3>
+<mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput [(ngModel)]="username"/>
+</mat-form-field>
+<br/>
+<mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput [(ngModel)]="password"/>
+</mat-form-field>
+<br/>
+<a class="button" mat-flat-button (click)="login()">Login</a>
